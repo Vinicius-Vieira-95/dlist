@@ -30,9 +30,11 @@ public class Game {
     private String year;
     private String genre;
     private String platforms;
-    private String score;
-    private String imgUri;
-    private String shortDescrition;
-    private String longDescrition;
+    private Double score;
+    private String imgUrl;
+    private String shortDescription;
+
+    @Column(columnDefinition = "TEXT")
+    private String longDescription;
 
 }
