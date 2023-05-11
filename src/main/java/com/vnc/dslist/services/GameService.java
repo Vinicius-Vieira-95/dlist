@@ -14,17 +14,17 @@ import com.vnc.dslist.repositories.GameRepository;
 public class GameService {
     
     @Autowired
-    private GameRepository repository;
+    private GameRepository gameRepository;
 
     @Transactional(readOnly = true)
     public List<GameMinDto> findAll() {
-        var list = repository.findAllGameMinDto();
+        var list = gameRepository.findAllGameMinDto();
         return list;
     }
 
     @Transactional(readOnly = true)
     public GameDto getGameById(Long id) throws Exception {
-        var game = repository.findById(id).orElseThrow(() ->  new  Exception("game não encontado"));
+        var game = gameRepository.findById(id).orElseThrow(() ->  new  Exception("game não encontado"));
         return new GameDto(game);
     }
 }

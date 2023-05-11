@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.vnc.dslist.dto.GameDto;
 import com.vnc.dslist.dto.GameMinDto;
-import com.vnc.dslist.entities.Game;
 import com.vnc.dslist.services.GameService;
 
 import lombok.var;
@@ -22,11 +21,17 @@ public class GameController {
     @Autowired
     private GameService service;
 
-    @GetMapping("/list")
+    @GetMapping()
     public List<GameMinDto> findAll() {
         var list = service.findAll();
         return list;
     }
+
+    // @GetMapping("/lists")
+    // public List<GameListDto> gameListDto() {
+    //     var list = service.getGameList();
+    //     return list;
+    // }
 
     @GetMapping("/{id}")
     public GameDto getId(@PathVariable("id") Long id) throws Exception{
