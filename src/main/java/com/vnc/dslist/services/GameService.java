@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.vnc.dslist.dto.GameDto;
 import com.vnc.dslist.dto.GameMinDto;
+import com.vnc.dslist.interfaces.GameMinProjection;
 import com.vnc.dslist.repositories.GameRepository;
 
 @Service
@@ -26,5 +27,11 @@ public class GameService {
     public GameDto getGameById(Long id) throws Exception {
         var game = gameRepository.findById(id).orElseThrow(() ->  new  Exception("game não encontado"));
         return new GameDto(game);
+    }
+
+    public List<GameMinDto> findByList(Long listId) {
+        List<GameMinProjection> list = gameRepository.searchByList(listId);
+        var listGameDto = list.stream().map(x -> new GameMinDto(x)).toList();
+        return listGameDto; 
     }
 }

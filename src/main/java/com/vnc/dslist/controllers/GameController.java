@@ -27,12 +27,6 @@ public class GameController {
         return list;
     }
 
-    // @GetMapping("/lists")
-    // public List<GameListDto> gameListDto() {
-    //     var list = service.getGameList();
-    //     return list;
-    // }
-
     @GetMapping("/{id}")
     public GameDto getId(@PathVariable("id") Long id) throws Exception{
         var gameDto = service.getGameById(id);
