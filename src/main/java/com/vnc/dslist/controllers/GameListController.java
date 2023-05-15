@@ -12,6 +12,7 @@ import com.vnc.dslist.dto.GameListDto;
 import com.vnc.dslist.dto.GameMinDto;
 import com.vnc.dslist.services.GameListService;
 import com.vnc.dslist.services.GameService;
+import com.vnc.dslist.services.exceptions.ResourceNotFoundException;
 
 @RestController
 @RequestMapping("/game-list")
@@ -30,7 +31,7 @@ public class GameListController {
     }
 
     @GetMapping("/{listId}/games")
-    public List<GameMinDto> findByList(@PathVariable Long listId) {
+    public List<GameMinDto> findByList(@PathVariable Long listId) throws ResourceNotFoundException {
         var list = gameService.findByList(listId);
         return list;
     }
