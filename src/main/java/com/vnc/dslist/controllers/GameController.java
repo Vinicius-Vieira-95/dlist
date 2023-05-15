@@ -21,7 +21,7 @@ public class GameController {
     @Autowired
     private GameService service;
 
-    @GetMapping()
+    @GetMapping
     public List<GameMinDto> findAll() {
         var list = service.findAll();
         return list;

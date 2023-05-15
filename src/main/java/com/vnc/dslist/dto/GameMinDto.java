@@ -1,19 +1,12 @@
 package com.vnc.dslist.dto;
 
-import java.io.Serializable;
-
 import com.vnc.dslist.interfaces.GameMinProjection;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
+
 
 @Getter
-@AllArgsConstructor
-@NoArgsConstructor
-public class GameMinDto implements Serializable {
-
-    private static final long serialVersionUID = 1L;
+public class GameMinDto {
 
     private Long id;
     private String title;
@@ -21,6 +14,14 @@ public class GameMinDto implements Serializable {
     private String imgUrl;
     private String shortDescription;
 
+    public GameMinDto(Long id, String title, String year, String imgUrl, String shortDescription) {
+        this.id = id;
+        this.title = title;
+        this.year = Integer.parseInt(year);
+        this.imgUrl = imgUrl;
+        this.shortDescription = shortDescription;
+    }
+    
     public GameMinDto(GameMinProjection projection) {
         id = projection.getId();
         title = projection.getTitle();
