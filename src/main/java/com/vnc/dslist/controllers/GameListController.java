@@ -1,8 +1,8 @@
 package com.vnc.dslist.controllers;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,14 +25,14 @@ public class GameListController {
     private GameService gameService;
 
     @GetMapping
-    public List<GameListDto> getAllGameList(){
-        var list = gameListService.getGameList();
+    public Page<GameListDto> getAllGameList(Pageable pageable){
+        var list = gameListService.getGameList(pageable);
         return list;
     }
 
     @GetMapping("/{listId}/games")
-    public List<GameMinDto> findByList(@PathVariable Long listId) throws ResourceNotFoundException {
-        var list = gameService.findByList(listId);
+    public Page<GameMinDto> findByList(@PathVariable Long listId, Pageable pageable) throws ResourceNotFoundException {
+        var list = gameService.findByList(listId, pageable);
         return list;
     }
 }

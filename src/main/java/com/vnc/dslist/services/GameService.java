@@ -1,8 +1,8 @@
 package com.vnc.dslist.services;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,8 +20,8 @@ public class GameService {
     private GameRepository gameRepository;
 
     @Transactional(readOnly = true)
-    public List<GameMinDto> findAll() {
-        var list = gameRepository.findAllGameMinDto();
+    public Page<GameMinDto> findAll(Pageable page) {
+        var list = gameRepository.findAllGameMinDto(page);
         return list;
     }
 
@@ -32,10 +32,10 @@ public class GameService {
     }
 
     @Transactional(readOnly = true)
-    public List<GameMinDto> findByList(Long listId) throws ResourceNotFoundException {
-        List<GameMinProjection> list = gameRepository.searchByList(listId);
+    public Page<GameMinDto> findByList(Long listId, Pageable pageable) throws ResourceNotFoundException {
+        Page<GameMinProjection> list = gameRepository.searchByList(listId, pageable);
         if(list.isEmpty()) throw new ResourceNotFoundException("List not found", HttpStatus.NOT_FOUND);
-        var listGameDto = list.stream().map(x -> new GameMinDto(x)).toList();
+        var listGameDto = list.map(game -> new GameMinDto(game));
         return listGameDto;
     }
 }
